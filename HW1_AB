@@ -1,0 +1,2 @@
+Git provides a history of content changes.
+git log --graph
