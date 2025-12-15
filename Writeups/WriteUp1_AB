@@ -1,0 +1,9 @@
+Three slurm jobs will be submitted
+The if statement is used to distribute the lines of data.txt across the array jobs. Each line is assigned to one array task to ensure all lines are processed once.
+Array task 0: 
+0:12, 3:8
+Array  task 1:
+1:7, 4:27
+Array task 2:
+2:91
+5:30
