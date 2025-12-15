@@ -1,0 +1,150 @@
+1. Project Overview
+Overarching Goal
+
+The overarching goal of this project is to characterize age-associated molecular signatures of corpora amylacea (CA) and to determine whether spatial transcriptomic profiles surrounding CA can be used to distinguish CA-associated tissue from non-CA tissue. Ultimately, the project aims to assess whether these spatial gene expression patterns can support the development of a classifier that identifies CA-associated microenvironments.
+
+Rationale
+
+Corpora amylacea are age-associated, glycoprotein-rich aggregates commonly observed in the aging human brain and in neurodegenerative conditions. Despite their frequent presence, their biological significance and molecular context remain poorly understood. Understanding the transcriptional landscape surrounding CA may reveal insights into aging-related processes such as altered metabolism, inflammation, or cellular stress responses. This project addresses the gap between histological observation of CA and their molecular and spatial context, making it a worthwhile and timely problem in aging and neurobiology research.
+
+Specific Aims
+Aim 1: Identify age-associated transcriptional signatures in spatial regions proximal to corpora amylacea
+
+Aim statement: Quantify and compare gene expression patterns in spatial transcriptomic spots located near corpora amylacea versus regions distal to CA across age groups.
+
+Expected outcomes: Identification of genes and pathways enriched in CA-adjacent regions, potentially related to aging, glial activity, metabolic stress, or protein aggregation.
+
+Potential challenges: Spatial resolution may blur CA-adjacent and non-adjacent regions. This will be addressed by testing multiple distance thresholds and aggregating spots into defined spatial bins.
+
+Aim 2: Build and evaluate a classifier to distinguish CA-associated regions using spatial transcriptomic data
+
+Aim statement: Develop a machine learning classifier that predicts whether a spatial transcriptomic region is CA-associated based on gene expression features.
+
+Expected outcomes: A trained model that can accurately classify CA-proximal versus CA-distal regions and highlight predictive gene features.
+
+Potential challenges: Class imbalance (fewer CA-associated regions) and overfitting. These will be addressed using balanced sampling strategies, regularization, and cross-validation.
+
+2. Data
+Dataset Description
+
+Source: Publicly available or lab-generated spatial transcriptomics datasets (e.g., 10x Visium) from human brain tissue across different ages, paired with histological annotations identifying corpora amylacea.
+
+Size:
+
+Samples: Multiple tissue sections across individuals and age groups
+
+Features: ~10,000–20,000 genes per spatial spot
+
+Storage: On the order of tens of gigabytes depending on image resolution and number of samples
+
+Format:
+
+Gene expression matrices (HDF5 / CSV)
+
+Spatial coordinates (CSV / JSON)
+
+Histology images (TIFF / PNG)
+
+Data Suitability
+
+The raw data format is suitable but requires preprocessing.
+
+Necessary steps include normalization, log transformation, filtering low-quality spots, and spatial annotation of CA proximity.
+
+Spatial distances from CA regions will be computed to define CA-adjacent versus distal spots.
+
+Storage and Data Management
+
+Storage: Data will be stored on a secure institutional server or HPC filesystem.
+
+Backup: Automated backups using institutional data management systems or cloud-based redundancy.
+
+Sharing: Processed datasets and metadata will be shared with collaborators via controlled-access repositories (e.g., GitHub + cloud storage or institutional data portals).
+
+3. Environment
+Coding Environment
+
+Analysis will be conducted using Jupyter notebooks on a local machine and/or HPC cluster, depending on dataset size.
+
+Development may also use VS Code or code-server for remote work.
+
+Dependencies
+
+Key tools and libraries include:
+
+Python (NumPy, pandas, SciPy)
+
+Scanpy / Squidpy for spatial transcriptomics
+
+scikit-learn for machine learning
+
+matplotlib / seaborn for visualization
+
+Reproducibility
+
+Version control: Git and GitHub
+
+Environment management: requirements.txt or environment.yml
+
+Optional containerization: Docker or Singularity for portability and reproducibility
+
+4. Pipeline
+Algorithms and Methods
+
+Quality control and filtering of spatial transcriptomic spots
+
+Normalization and transformation of gene expression data
+
+Annotation of spatial regions relative to corpora amylacea
+
+Differential expression analysis between CA-adjacent and CA-distal regions
+
+Feature selection for machine learning
+
+Classifier training, validation, and evaluation
+
+Each step depends on outputs from the previous step, particularly spatial annotation and preprocessing.
+
+Scalability and Efficiency
+
+Sparse matrix representations and vectorized operations will be used
+
+Dimensionality reduction and feature selection will limit computational load
+
+HPC parallelization may be used for large datasets or parameter sweeps
+
+5. Machine Learning
+Task Definition
+
+This is a supervised classification task: predicting whether a spatial transcriptomic region is CA-associated or non-CA-associated based on gene expression data.
+
+Feature Representation
+
+Normalized gene expression values
+
+Optionally reduced via PCA or restricted to biologically relevant gene sets
+
+Spatial features (e.g., distance to CA) may be included as auxiliary inputs
+
+Model Selection
+
+Baseline: Logistic regression
+
+Advanced models: Random forest, support vector machine, or gradient boosting
+These models balance interpretability and performance for high-dimensional biological data.
+
+Generalization Strategy
+
+Train/validation/test splits across tissue sections or individuals
+
+k-fold cross-validation
+
+Regularization and early stopping to prevent overfitting
+
+Evaluation Metrics
+
+Accuracy
+
+Precision, recall, and F1-score (important for class imbalance)
+
+ROC-AUC to evaluate discrimination performance
